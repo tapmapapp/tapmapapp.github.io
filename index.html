@@ -55,9 +55,10 @@
             const code = urlParams.get('code');
             return code;
         }
-        console.log({ email: getEmail(), code: getCode() })
+        // console.log({ email: getEmail(), code: getCode() })
+        var myList = new Array();
         var database = firebase.database();
-        var leadsRef = database.ref('providers/' + getEmail() + '@gmailcom/' + getCode() + '/images/');
+        var leadsRef = database.ref('providers/' + getEmail() + '/' + getCode() + '/images/');
         leadsRef.on('value', function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
                 var childData = childSnapshot.val();
@@ -73,7 +74,7 @@
     </script>
       <div class="container">
         <div class="galleria">
-            <img src="photo1.jpg">
+            <img src="photo2.jpg">
             <img src="photo2.jpg">
             <img src="photo3.jpg">
             <img src="photo4.jpg">
