@@ -64,9 +64,10 @@
             snapshot.forEach(function (childSnapshot) {
                 myList.push(childSnapshot.val().imageURL);
                 getImages();
+                console.log(myList.length)
             });
         });
-        console.log(myList.length)
+       
         
         var galleryWrapper = document.getElementById("gallery");
         function getImages() {
