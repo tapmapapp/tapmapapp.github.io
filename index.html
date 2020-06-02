@@ -12,7 +12,6 @@
             height: 100vh;
             background: #000
         }
-
         .container {
             display: flex;
         }
@@ -20,7 +19,9 @@
 </head>
 
 <body>
-  
+    <div class="container">
+        <div class="galleria" id='gallery'></div>
+    </div>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
     <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -55,31 +56,31 @@
             const code = urlParams.get('code');
             return code;
         }
-        // console.log({ email: getEmail(), code: getCode() })
         var myList = new Array();
         var database = firebase.database();
         var leadsRef = database.ref('providers/' + getEmail() + '/' + getCode() + '/images/');
         leadsRef.on('value', function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
-                var childData = childSnapshot.val();
-                console.log(childData)
+                myList.push(childSnapshot.val().imageURL);
+                getImages();
             });
         });
+        var galleryWrapper = document.getElementById("gallery");
+        function getImages() {
+            myList.forEach((url, index) => {
+                galleryWrapper.innerHTML = `<img src=${url}>` + galleryWrapper.innerHTML;
+                setTimeout(() => {
+                    if (index + 1 === myList.length) {
+                        Galleria.loadTheme('https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js');
+                        Galleria.run('.galleria');
+                    }
+                }, 2500);
+            });
+        }
     </script>
     <script>
-        (function () {
-            Galleria.loadTheme('https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js');
-            Galleria.run('.galleria');
-        }());
+
     </script>
-      <div class="container">
-        <div class="galleria">
-            <img src="photo2.jpg">
-            <img src="photo2.jpg">
-            <img src="photo3.jpg">
-            <img src="photo4.jpg">
-        </div>
-    </div>
 </body>
 
 </html>
