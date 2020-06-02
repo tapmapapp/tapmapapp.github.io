@@ -4,8 +4,6 @@
     <title>
         Tapmap
     </title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/galleria.min.js"></script>
     <style>
         .galleria {
             width: 100%;
@@ -30,7 +28,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
-    <script>
+    <script type='text/javascript'>
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyDInVEG37vn9dTKkFQ8xG9TIOpC8AdCdrE",
@@ -46,6 +44,8 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
     </script>
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/galleria.min.js"></script>
     <script type='text/javascript'>
         function getEmail() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -90,9 +90,6 @@
                 dataSource: myList
             });
         }());
-    </script>
-    <script>
-
     </script>
 </body>
 
