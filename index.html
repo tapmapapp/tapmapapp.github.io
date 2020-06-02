@@ -12,6 +12,7 @@
             height: 100vh;
             background: #000
         }
+
         .container {
             display: flex;
         }
@@ -56,31 +57,38 @@
             const code = urlParams.get('code');
             return code;
         }
-        var myList = new Array();
+        var myList = [];
         var database = firebase.database();
-        
         var leadsRef = database.ref('providers/' + getEmail() + '/' + getCode() + '/images/');
         leadsRef.on('value', function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
-                myList.push(childSnapshot.val().imageURL);
-                getImages();
-                console.log(myList.length)
+                /* myList.push(childSnapshot.val().imageURL); */
+                /* getImages(); */
+                myList.push(
+                    {
+                        image: childSnapshot.val().imageURL,
+                    }
+                )
+                $('.galleria').data('galleria').load(myList)
             });
         });
-       
-        
-        var galleryWrapper = document.getElementById("gallery");
-        function getImages() {
-            myList.forEach((url, index) => {
-                galleryWrapper.innerHTML = `<img src=${url}>` + galleryWrapper.innerHTML;
-                setTimeout(() => {
-                    if (index + 1 === myList.length) {
-                        Galleria.loadTheme('https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js');
-                        Galleria.run('.galleria');
-                    }
-                }, 2500);
+        /* var galleryWrapper = document.getElementById("gallery"); */
+        // function getImages() {
+        //     myList.forEach((url, index) => {
+        //         /* galleryWrapper.innerHTML = `<img src=${url}>` + galleryWrapper.innerHTML;
+        //         setTimeout(() => {
+        //             if (index + 1 === myList.length) {
+
+        //             }
+        //         }, 2500); */
+        //     });
+        // }
+        (function () {
+            Galleria.loadTheme('https://cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/themes/classic/galleria.classic.min.js');
+            Galleria.run('.galleria', {
+                dataSource: myList
             });
-        }
+        }());
     </script>
     <script>
 
