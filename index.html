@@ -59,7 +59,7 @@
         }
         var myList = [];
         var database = firebase.database();
-        var leadsRef = database.ref('providers/' + getEmail() + '/' + getCode() + '/images/');
+        var leadsRef = database.ref('uploads/' + getEmail() + '/' + getCode() + '/images/');
         leadsRef.on('value', function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
                 /* myList.push(childSnapshot.val().imageURL); */
